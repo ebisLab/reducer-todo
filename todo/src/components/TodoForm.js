@@ -4,7 +4,7 @@ const TodoForm = (props) =>{
     const [newTask, setNewTask] = useState('');
 
     // console.log('new task--->', props)
-    const changeHandler = e =>{
+    const changeHandler = (e) =>{
         setNewTask(e.target.value)
       }
 

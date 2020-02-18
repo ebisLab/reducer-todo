@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer} from 'react';
 import logo from './logo.svg';
+import {todoReducer, initialState} from './reducers/todoReducer'
 import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList'
 
-const taskItem = [
+export const taskItem = [
   {
     task: 'Organize Garage',
     id: 1528817077286,
@@ -16,11 +17,16 @@ const taskItem = [
     completed: false
   }
 ];
+//dispatch takes in an action object, and calls the reducer function with state and that action.
 
 function App() {
+  const [state, dispatch] = useReducer(todoReducer, initialState);
+
+  // console.log('console state dispatch', state, dispatch)
+  //determine what our state looks like 
 
   const [todoItemList, setTodoItemList] =useState(taskItem);
-  // const [dataText, setDataText] = useState('')
+  const [dataText, setDataText] = useState('')
 
  console.log(todoItemList, 'todo item list')
   const toggleItem = clickedId =>{
@@ -32,7 +38,8 @@ function App() {
 console.log(clickedId ? `yes clicked ${item.task}`: 'not clicked')
       return {...item, completed: !item.completed}
 
-    }else{
+    }
+     else{
       console.log('item is untouched')
       return item;
     }
@@ -51,7 +58,6 @@ console.log(clickedId ? `yes clicked ${item.task}`: 'not clicked')
       completed: false
     }
     setTodoItemList([...todoItemList, newTaskItem])
-  
   }
 
   const removeList = itemTask =>{
@@ -61,9 +67,9 @@ console.log(clickedId ? `yes clicked ${item.task}`: 'not clicked')
     }))
   }
 
-  // console.log('addnewitem--->', addNewItem)
   return (
     <div className="App">
+      hello
 <TodoForm addNewItem={addNewItem} removeList ={removeList} />
 <TodoList taskItem={todoItemList} toggleItem={toggleItem}/>
 
