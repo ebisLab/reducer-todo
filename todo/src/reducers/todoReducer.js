@@ -107,10 +107,10 @@ export const todoReducer = (state, action) =>{
                 id: Date.now(),
                 completed: false}]
            };
-        // case 'TOGGLE_TASK':
-        //     return state.map(task => 
-        //         (task)
-        //         )
+        case 'TOGGLE_TASK':
+            return state.map((taskValue, index) => 
+                (index === action.index ? {...taskValue, completed: !taskValue.completed }: taskValue)
+                )
             
         default:
             return state;
