@@ -90,6 +90,9 @@ This is the Function Component section
     )
   }/>
   <button type="submit">Add</button>
+  <button type="submit"
+  onClick={()=> dispatch({type: 'DELETE_TOGGLE_ITEMS' })}
+  >Remove</button>
 </form>
 
 <pre>
@@ -100,7 +103,7 @@ This is the Function Component section
 <div
 key={taskValue.id}
 onClick={()=> dispatch({type:'TOGGLE_TASK', clickedId })}
-style={{textDecoration: taskValue.completed ?'line-through': ''}}
+className={taskValue.completed ?'completed': ''}
 >{taskValue.task}
 
 
