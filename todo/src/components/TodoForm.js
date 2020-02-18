@@ -11,6 +11,7 @@ const TodoForm = (props) =>{
       const handleSubmit = e =>{
           console.log('clicked on handle submit')
         e.preventDefault();
+        if(!newTask)return;
         props.addNewItem(newTask);
         setNewTask('') //clears out input
         

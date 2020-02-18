@@ -20,18 +20,19 @@ export const taskItem = [
 //dispatch takes in an action object, and calls the reducer function with state and that action.
 
 function App() {
-  const [state, dispatch] = useReducer(todoReducer, initialState);
+  // const [state, dispatch] = useReducer(todoReducer, initialState);
+  const [{todos}, dispatch] = useReducer(todoReducer, initialState);
 
-  // console.log('console state dispatch', state, dispatch)
   //determine what our state looks like 
 
-  const [todoItemList, setTodoItemList] =useState(taskItem);
+  const [toDoItemList, setTodoItemList] =useState(taskItem);
+
   const [dataText, setDataText] = useState('')
 
- console.log(todoItemList, 'todo item list')
+ console.log(toDoItemList, 'todo item list')
   const toggleItem = clickedId =>{
     console.log('clicked the outside map')
-    const newTaskList = todoItemList.map(item => { 
+    const newTaskList = toDoItemList.map(item => { 
       console.log('clicked this inside map', item)
 
     if (item.id === clickedId){
@@ -57,21 +58,45 @@ console.log(clickedId ? `yes clicked ${item.task}`: 'not clicked')
       id: Date.now(),
       completed: false
     }
-    setTodoItemList([...todoItemList, newTaskItem])
+    setTodoItemList([...toDoItemList, newTaskItem])
   }
 
   const removeList = itemTask =>{
     console.log('it should be removed now')
-    setTodoItemList(todoItemList.filter(item=>{
+    setTodoItemList(toDoItemList.filter(item=>{
       return !item.completed
     }))
   }
 
+  console.log(dataText, '<----dataText')
   return (
     <div className="App">
-      hello
+This is the Function Component section
 <TodoForm addNewItem={addNewItem} removeList ={removeList} />
-<TodoList taskItem={todoItemList} toggleItem={toggleItem}/>
+
+<TodoList taskItem={toDoItemList} toggleItem={toggleItem}/>
+<p>  ========================</p>
+<p> This is the reducer area</p>
+<form onSubmit ={e => {
+  e.preventDefault();
+  dispatch({type: 'ADD_ITEM', dataText});
+  setDataText('');
+}}>
+
+  <input value={dataText} 
+  onChange={e => 
+  (
+    setDataText(e.target.value)
+    )
+  }/>
+  <button type="submit">Add</button>
+</form>
+
+<pre>
+  {JSON.stringify(todos, null, 1)}
+</pre>
+
+{todos.map(items=> <div>{items.task}</div>)}
 
 
     </div>
