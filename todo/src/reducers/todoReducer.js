@@ -108,9 +108,9 @@ export const todoReducer = (state, action) =>{
                 completed: false}]
            };
         case 'TOGGLE_TASK':
-            return state.map((taskValue, index) => 
-                (index === action.index ? {...taskValue, completed: !taskValue.completed }: taskValue)
-                )
+            return {todos: state.todos.map((taskValue, clickedId) => 
+                (clickedId === action.clickedId ? {...taskValue, completed: !taskValue.completed }: taskValue)
+                )}
             
         default:
             return state;

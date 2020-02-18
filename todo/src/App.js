@@ -96,7 +96,15 @@ This is the Function Component section
   {JSON.stringify(todos, null, 1)}
 </pre>
 
-{todos.map(items=> <div>{items.task}</div>)}
+{todos.map((taskValue, clickedId)=> (
+<div
+key={taskValue.id}
+onClick={()=> dispatch({type:'TOGGLE_TASK', clickedId })}
+style={{textDecoration: taskValue.completed ?'line-through': ''}}
+>{taskValue.task}
+
+
+</div>))}
 
 
     </div>
